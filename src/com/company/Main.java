@@ -1,4 +1,5 @@
 package com.company;
+import java.util.Scanner;
 
 public class Main {
 
@@ -75,6 +76,20 @@ public class Main {
         String reflectorName8 = "ETW";
         String reflector8 = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
+        /**
+         * Parts
+         */
+
+        String rotorLeft = new String;
+        String rotorMiddle = new String;
+        String rotorRight = new String;
+
+        /**
+         * Others
+         */
+
+        Scanner scanner = new Scanner(System.in);
+
 
         /**=====================================
          * Start program
@@ -116,8 +131,10 @@ public class Main {
         Setup rotors
          */
 
+
         System.out.println("Please enter left rotor, selecting from " + rotorNameList + ".");
-        String rotorNameLeft = System.console().readLine().toUpperCase();
+        String rotorNameLeft = scanner.nextLine().toUpperCase();
+        System.out.println("Your input: [" + rotorNameLeft +"].");
 
         //check input validity.
         boolean rotorValidityLeft = false;
@@ -125,19 +142,28 @@ public class Main {
         while(!rotorValidityLeft){
 
             for(int i = 0; i < 8; i++){
-                if(rotorNameLeft == rotorNames[i]){
+
+                System.out.println("Check rotor " + rotorNames[i] + ".");
+
+                if(rotorNameLeft == rotorNames[i]) {
                     rotorValidityLeft = true;
+                    rotorLeft = rotorSet[i];
+                    System.out.println("Found a match.");
+                } else {
+                    System.out.println("Not a match.");
                 }
             }
 
             if(rotorValidityLeft){
 
-                System.out.println("Rotor "+ rotorNameLeft);
+                System.out.println("Rotor ["+ rotorNameLeft + "] " + "[" + rotorLeft + "] selected");
+                break;
 
             } else {
 
                 System.out.println("Invalid input, please try again.");
-                rotorNameLeft = System.console().readLine().toUpperCase();
+                rotorNameLeft = scanner.nextLine().toUpperCase();
+                System.out.println("Your input: [" + rotorNameLeft + "].");
 
             }
 
