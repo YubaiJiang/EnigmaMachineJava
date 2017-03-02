@@ -3,6 +3,10 @@ import java.util.Scanner;
 
 public class Main {
 
+    /**=====================================
+     * Main function
+     =====================================*/
+
     public static void main(String[] args) {
         // write your code here
 
@@ -52,10 +56,10 @@ public class Main {
          * Reflectors
          */
 
-        String reflectorName1 = "Beta";
+        String reflectorName1 = "BETA";
         String reflector1 = "LEYJVCNIXWPBQMDRTAKZGFUHOS";
 
-        String reflectorName2 = "Gamma";
+        String reflectorName2 = "GAMMA";
         String reflector2 = "FSOKANUERHMBTIYCWLQPZXVGJD";
 
         String reflectorName3 = "A";
@@ -67,10 +71,10 @@ public class Main {
         String reflectorName5 = "C";
         String reflector5 = "FVPJIAOYEDRZXWGCTKUQSBNMHL";
 
-        String reflectorName6 = "B Thin";
+        String reflectorName6 = "B THIN";
         String reflector6 = "ENKQAUYWJICOPBLMDXZVFTHRGS";
 
-        String reflectorName7 = "C Thin";
+        String reflectorName7 = "C THIN";
         String reflector7 = "RDOBJNTKVEHMLFCWZAXGYIPSUQ";
 
         String reflectorName8 = "ETW";
@@ -80,15 +84,15 @@ public class Main {
          * Parts
          */
 
-        String rotorLeft = new String;
-        String rotorMiddle = new String;
-        String rotorRight = new String;
 
         /**
          * Others
          */
 
-        Scanner scanner = new Scanner(System.in);
+
+
+
+
 
 
         /**=====================================
@@ -132,43 +136,119 @@ public class Main {
          */
 
 
+        //Setup left rotor
         System.out.println("Please enter left rotor, selecting from " + rotorNameList + ".");
-        String rotorNameLeft = scanner.nextLine().toUpperCase();
-        System.out.println("Your input: [" + rotorNameLeft +"].");
 
-        //check input validity.
-        boolean rotorValidityLeft = false;
+        String rotorLeft = selectRotor(rotorSet, rotorNames);
+        String rotorLeftSteppingPosition = loadRotorSteppingPosition(rotorLeft, rotorSet, rotorSteppingPositions);
 
-        while(!rotorValidityLeft){
+        //Setup middle rotor
+        System.out.println("Please enter middle rotor, selecting from " + rotorNameList + ".");
 
-            for(int i = 0; i < 8; i++){
+        String rotorMiddle = selectRotor(rotorSet, rotorNames);
+        String rotorMiddleSteppingPosition = loadRotorSteppingPosition(rotorMiddle, rotorSet, rotorSteppingPositions);
 
-                System.out.println("Check rotor " + rotorNames[i] + ".");
+        //Setup right rotor
+        System.out.println("Please enter right rotor, selecting from " + rotorNameList + ".");
 
-                if(rotorNameLeft == rotorNames[i]) {
-                    rotorValidityLeft = true;
-                    rotorLeft = rotorSet[i];
+        String rotorRight = selectRotor(rotorSet, rotorNames);
+        String rotorRightSteppingPosition = loadRotorSteppingPosition(rotorRight, rotorSet, rotorSteppingPositions);
+
+
+        /*
+        Setup reflector
+         */
+
+        System.out.println("Please enter reflector, selecting from " + reflectorNameList + ".");
+        String reflector = selectRotor(reflectorSet, reflectorNames);
+
+
+    }
+
+    /**=====================================
+     * subfunctions
+     =====================================*/
+
+    /**
+     * Rotor setup: request user input, check input validity, then select rotor String.
+     *
+     *
+     * @param partSets collection or rotors or reflectors
+     * @param nameSets colloection of names of rotors or reflectors
+     */
+
+    public static String selectRotor(String[] partSets, String[] nameSets){
+
+        boolean validity = false;
+
+        Scanner scan = new Scanner(System.in);
+        String testInput = scan.nextLine().toUpperCase();
+        String rotorSelected = new String();
+
+        System.out.println("Your input: [" + testInput +"].");
+
+        while(!validity) {
+
+            for (int i = 0; i < 8; i++) {
+
+                System.out.println("Check rotor " + nameSets[i] + ".");
+
+                if (testInput.equals(nameSets[i])) {
+
+                    validity = true;
+                    rotorSelected = partSets[i];
                     System.out.println("Found a match.");
+
+                    break;
+
                 } else {
                     System.out.println("Not a match.");
                 }
             }
 
-            if(rotorValidityLeft){
+            if (validity) {
 
-                System.out.println("Rotor ["+ rotorNameLeft + "] " + "[" + rotorLeft + "] selected");
+                System.out.println("[" + testInput + "] [" + rotorSelected + "] selected");
                 break;
 
             } else {
 
                 System.out.println("Invalid input, please try again.");
-                rotorNameLeft = scanner.nextLine().toUpperCase();
-                System.out.println("Your input: [" + rotorNameLeft + "].");
+                testInput = scan.nextLine().toUpperCase();
+                System.out.println("Your input: [" + testInput + "].");
+
+            }
+        }
+
+        return rotorSelected;
+    }
+
+    /**
+     * Function: Load stepping position
+     *
+     * @param rotorSelected: detail(String) of the rotor selected by user
+     * @param partSet: collection of parts
+     * @param steppingPositionSet: collection of steppingPosition of all rotors
+     */
+
+    public static String loadRotorSteppingPosition(String rotorSelected, String[] partSet, String[] steppingPositionSet){
+
+        String steppingPositionLoaded = new String();
+
+        //Looking for position
+        for(int i = 0; i < 8; i++){
+
+            if(rotorSelected.equals(partSet[i])){
+
+                steppingPositionLoaded = steppingPositionSet[i];
+                System.out.println("Stepping position is [" + steppingPositionLoaded + "]");
+                break;
 
             }
 
         }
 
+        return steppingPositionLoaded;
 
     }
 }
