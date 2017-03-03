@@ -278,8 +278,10 @@ public class Main {
                     break;
 
                 } else {
+
                     System.out.println("Not a match.");
                 }
+
             }
 
             if (validity) {
@@ -297,9 +299,11 @@ public class Main {
                 System.out.println("");
 
             }
+
         }
 
         return rotorSelected;
+
     }
 
     /**
@@ -404,6 +408,7 @@ public class Main {
                             validityCharacter[i] = true;
 
                         }
+
                     }
 
                     if (validityCharacter[i]) {
@@ -415,6 +420,7 @@ public class Main {
                         System.out.println(insertedPlugs.charAt(i) + " is an invalid character.");
 
                     }
+
                 }
 
                 //assess matching results
@@ -519,6 +525,7 @@ public class Main {
                         break;
 
                     }
+                    
                 }
 
                 if (validityString) {

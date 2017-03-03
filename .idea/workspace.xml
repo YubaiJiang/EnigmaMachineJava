@@ -2,8 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="608918ef-6489-4e73-8f01-8f87a3536bdf" name="Default" comment="user setup stage finished">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/EnigmaMachineJava/com/company/Main.class" afterPath="$PROJECT_DIR$/out/production/EnigmaMachineJava/com/company/Main.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/company/Main.java" afterPath="$PROJECT_DIR$/src/com/company/Main.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -23,8 +21,8 @@
       <file leaf-file-name="Main.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/company/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="359">
-              <caret line="452" column="90" lean-forward="false" selection-start-line="452" selection-start-column="90" selection-end-line="452" selection-end-column="90" />
+            <state relative-caret-position="7395">
+              <caret line="527" column="20" lean-forward="false" selection-start-line="527" selection-start-column="20" selection-end-line="527" selection-end-column="20" />
               <folding />
             </state>
           </provider>
@@ -447,8 +445,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/company/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="359">
-          <caret line="452" column="90" lean-forward="false" selection-start-line="452" selection-start-column="90" selection-end-line="452" selection-end-column="90" />
+        <state relative-caret-position="7395">
+          <caret line="527" column="20" lean-forward="false" selection-start-line="527" selection-start-column="20" selection-end-line="527" selection-end-column="20" />
           <folding />
         </state>
       </provider>
