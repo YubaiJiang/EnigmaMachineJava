@@ -102,58 +102,54 @@ public class Main {
         System.out.println("Initialising...");
 
         System.out.println("Loading keyboard...");
+
         char[] keys = new char[26];
+
         for (int i = 0; i < 26; i++) {
+
             keys[i] = keyboard.charAt(i);
             System.out.println("Allocate " + keys[i] + " key to position " + (i));
+
         }
 
+        System.out.println("");
+
         System.out.println("Looking for rotors...");
+
         String[] rotorSet = {rotor1, rotor2, rotor3, rotor4, rotor5, rotor6, rotor7, rotor8,};
         String[] rotorNames = {rotorName1, rotorName2, rotorName3, rotorName4, rotorName5, rotorName6, rotorName7, rotorName8,};
         String[] rotorSteppingPositions = {rotorStep1, rotorStep2, rotorStep3, rotorStep4, rotorStep5, rotorStep6, rotorStep7, rotorStep8};
         String rotorNameList = java.util.Arrays.toString(rotorNames);
         System.out.println("Found rotors " + rotorNameList + ".");
+        System.out.println("");
+
         for (int i = 0; i < 8; i++) {
+
             System.out.println("Rotor " + rotorNames[i] + ":" + "\t" + rotorSet[i] + "\t Stepping position " + rotorSteppingPositions[i]);
+
         }
 
+        System.out.println("");
+
         System.out.println("Looking for reflectors...");
+
         String[] reflectorSet = {reflector1, reflector2, reflector3, reflector4, reflector5, reflector6, reflector7, reflector8,};
         String[] reflectorNames = {reflectorName1, reflectorName2, reflectorName3, reflectorName4, reflectorName5, reflectorName6, reflectorName7, reflectorName8,};
         String reflectorNameList = java.util.Arrays.toString(reflectorNames);
         System.out.println("Found reflectors " + reflectorNameList + ".");
+        System.out.println("");
+
         for (int i = 0; i < 8; i++) {
+
             System.out.println(reflectorNames[i] + ":" + "\t" + reflectorSet[i]);
+
         }
+
+        System.out.println("");
 
         /**=====================================
          * Setup
          =====================================*/
-
-        /*
-        Setup rotors
-         */
-
-
-        //Setup left rotor
-        System.out.println("Please enter left rotor, selecting from " + rotorNameList + ".");
-
-        String rotorLeft = selectRotor(rotorSet, rotorNames);
-        String rotorLeftSteppingPosition = loadRotorSteppingPosition(rotorLeft, rotorSet, rotorSteppingPositions);
-
-        //Setup middle rotor
-        System.out.println("Please enter middle rotor, selecting from " + rotorNameList + ".");
-
-        String rotorMiddle = selectRotor(rotorSet, rotorNames);
-        String rotorMiddleSteppingPosition = loadRotorSteppingPosition(rotorMiddle, rotorSet, rotorSteppingPositions);
-
-        //Setup right rotor
-        System.out.println("Please enter right rotor, selecting from " + rotorNameList + ".");
-
-        String rotorRight = selectRotor(rotorSet, rotorNames);
-        String rotorRightSteppingPosition = loadRotorSteppingPosition(rotorRight, rotorSet, rotorSteppingPositions);
-
 
         /*
         Setup reflector
@@ -161,10 +157,76 @@ public class Main {
 
         System.out.println("Please enter reflector, selecting from " + reflectorNameList + ".");
         String reflector = selectRotor(reflectorSet, reflectorNames);
+        System.out.println("");
+
+        /*
+        Setup rotors
+         */
+
+        //Setup left rotor
+        System.out.println("Please enter left rotor, selecting from " + rotorNameList + ".");
+
+        String rotorLeft = selectRotor(rotorSet, rotorNames);
+        String rotorLeftSteppingPosition = loadRotorSteppingPosition(rotorLeft, rotorSet, rotorSteppingPositions);
+        System.out.println("");
+
+        //Setup middle rotor
+        System.out.println("Please enter middle rotor, selecting from " + rotorNameList + ".");
+
+        String rotorMiddle = selectRotor(rotorSet, rotorNames);
+        String rotorMiddleSteppingPosition = loadRotorSteppingPosition(rotorMiddle, rotorSet, rotorSteppingPositions);
+        System.out.println("");
+
+        //Setup right rotor
+        System.out.println("Please enter right rotor, selecting from " + rotorNameList + ".");
+
+        String rotorRight = selectRotor(rotorSet, rotorNames);
+        String rotorRightSteppingPosition = loadRotorSteppingPosition(rotorRight, rotorSet, rotorSteppingPositions);
+        System.out.println("");
 
         /*
         Setup letter ring
          */
+
+        //Setup left letter ring
+        System.out.println("Please enter left letter ring position, single alphabet only.");
+        char ringPositionLeft = setupPosition(keyboard);
+        System.out.println("left letter ring on " + ringPositionLeft + " position.");
+        System.out.println("");
+
+        //Setup left middle ring
+        System.out.println("Please enter middle letter ring position, single alphabet only.");
+        char ringPositionMiddle = setupPosition(keyboard);
+        System.out.println("middle letter ring on " + ringPositionMiddle + " position.");
+        System.out.println("");
+
+        //Setup right letter ring
+        System.out.println("Please enter right letter ring position, single alphabet only.");
+        char ringPositionright = setupPosition(keyboard);
+        System.out.println("Right letter ring on " + ringPositionright + " position.");
+        System.out.println("");
+
+        /*
+        Setup rotor position
+         */
+
+        //Setup left letter ring
+        System.out.println("Please enter left rotor position, single alphabet only.");
+        char rotorPositionLeft = setupPosition(keyboard);
+        System.out.println("left rotor on " + rotorPositionLeft + " position.");
+        System.out.println("");
+
+        //Setup left middle ring
+        System.out.println("Please enter middle rotor position, single alphabet only.");
+        char rotorPositionMiddle = setupPosition(keyboard);
+        System.out.println("middle rotor on " + rotorPositionMiddle + " position.");
+        System.out.println("");
+
+        //Setup right letter ring
+        System.out.println("Please enter right rotor position, single alphabet only.");
+        char rotorPositionRight = setupPosition(keyboard);
+        System.out.println("Right rotor on " + rotorPositionRight + " position.");
+        System.out.println("");
 
         /*
         Setup plug-board
@@ -172,6 +234,7 @@ public class Main {
 
         System.out.println("Please enter plug-board setting, even number of alphabets only.");
         String plugboard = insertPlugs(keyboard);
+        System.out.println("");
 
 
     }
@@ -196,7 +259,9 @@ public class Main {
         String testInput = scan.nextLine().toUpperCase();
         String rotorSelected = new String();
 
+        System.out.println("");
         System.out.println("Your input: [" + testInput +"].");
+        System.out.println("");
 
         while(!validity) {
 
@@ -224,9 +289,12 @@ public class Main {
 
             } else {
 
+                System.out.println("");
                 System.out.println("Invalid input, please try again.");
                 testInput = scan.nextLine().toUpperCase();
+                System.out.println("");
                 System.out.println("Your input: [" + testInput + "].");
+                System.out.println("");
 
             }
         }
@@ -253,6 +321,7 @@ public class Main {
             if(rotorSelected.equals(partSet[i])){
 
                 steppingPositionLoaded = steppingPositionSet[i];
+                System.out.println("");
                 System.out.println("Stepping position is [" + steppingPositionLoaded + "]");
                 break;
 
@@ -275,7 +344,7 @@ public class Main {
     public static String insertPlugs(String alphabets){
 
         Scanner scan = new Scanner(System.in);
-        String insertedPlugs = scan.nextLine().toUpperCase(); //read input
+        String insertedPlugs = scan.nextLine().toUpperCase().replaceAll("\\s+",""); //read input
         int plugSize = insertedPlugs.length();
         int alphabetsSize = alphabets.length();
 
@@ -295,11 +364,14 @@ public class Main {
                 //check if the size is even and no more than 20
                 if((plugSize % 2 == 0) && plugSize <= 20){
 
+                    System.out.println("");
                     System.out.println(plugSize + " plugs provided.");
                     validitySize = true;
+                    System.out.println("");
 
                 } else {
 
+                    System.out.println("");
                     System.out.println("Input invalid, wrong number of characters. Please enter again.");
                     insertedPlugs = scan.nextLine().toUpperCase(); // reset input
                     plugSize = insertedPlugs.length(); // reset size
@@ -354,6 +426,7 @@ public class Main {
 
                         validityString = false;
                         validitySize = false;
+                        System.out.println("");
                         System.out.println("Input invalid, invalid characters. Please enter again.");
                         insertedPlugs = scan.nextLine().toUpperCase(); // reset input
                         plugSize = insertedPlugs.length(); // reset size
@@ -376,6 +449,7 @@ public class Main {
             if (validitySize && validityString) {
 
                 validity = true;
+                System.out.println("");
                 System.out.println("Letters " + insertedPlugs + " are plugged as pairs.");
 
             }
@@ -385,4 +459,100 @@ public class Main {
         return insertedPlugs;
 
     }
+
+    /**
+     * Function: set ring/rotor position
+     */
+
+    public static char setupPosition(String alphabets){
+
+        Scanner scan = new Scanner(System.in);
+        String inputPosition = scan.nextLine().toUpperCase(); //read input
+        int inputSize = inputPosition.length();
+        int alphabetsSize = alphabets.length();
+        char inputPositionChar = Character.MIN_VALUE;
+
+        boolean validitySize = true;
+        boolean validityString = false;
+        boolean validity = false;
+
+        //check user input validity
+        while(!validity) {
+
+            //check if user entered input of correct size
+            validitySize = false; //set to default, change to true later in test.
+            while(!validitySize){
+
+                //check if the size is even and no more than 20
+                if(inputSize == 1){
+
+                    System.out.println("");
+                    System.out.println(inputSize + " position provided.");
+                    validitySize = true;
+                    System.out.println("");
+
+                } else {
+
+                    System.out.println("");
+                    System.out.println("Input invalid, wrong number of positions. Please enter again.");
+                    inputPosition = scan.nextLine().toUpperCase(); // reset input
+                    inputSize = inputPosition.length(); // reset size
+
+                }
+
+            }
+
+            //Casting input String to char
+
+            inputPositionChar = inputPosition.charAt(0);
+
+            //check if the input is an alphabet
+            while (!validityString) {
+
+                for (int i = 0; i < alphabetsSize; i++) {
+
+
+                    if (inputPositionChar == (alphabets.charAt(i))) {
+
+                        validityString = true;
+
+                        break;
+
+                    }
+                }
+
+                if (validityString) {
+
+                    System.out.println(inputPositionChar + " is a valid position.");
+
+                } else {
+
+                    System.out.println(inputPositionChar + " is an invalid position. Enter again, please.");
+                    validityString = false;
+                    validitySize = false;
+                    inputPosition = scan.nextLine().toUpperCase(); // reset input
+                    inputSize = inputPosition.length(); // reset size
+
+                    break;
+
+                }
+
+            }
+
+            //check if the input is valid (all alphabets, even, <=20)
+            if (validitySize && validityString) {
+
+                validity = true;
+                System.out.println("");
+                System.out.println("Valid input.");
+                System.out.println("");
+
+            }
+
+        }
+
+        return inputPositionChar;
+
+    }
+
 }
