@@ -96,7 +96,7 @@ public class Main {
 
 
         /**=====================================
-         * Start program
+         * Initialisation
          =====================================*/
 
         System.out.println("Initialising...");
@@ -161,6 +161,10 @@ public class Main {
 
         System.out.println("Please enter reflector, selecting from " + reflectorNameList + ".");
         String reflector = selectRotor(reflectorSet, reflectorNames);
+
+        /*
+        Setup letter ring
+         */
 
         /*
         Setup plug-board
@@ -264,7 +268,6 @@ public class Main {
      * Function: Insert plugs
      * scan user input and check validity
      *
-     * @param scan: a scanner for user input
      * @param alphabets: all alphabets
      * @return insertedPlugs: String of user input
      */
@@ -272,7 +275,7 @@ public class Main {
     public static String insertPlugs(String alphabets){
 
         Scanner scan = new Scanner(System.in);
-        String insertedPlugs = scan.nextLine().toUpperCase();
+        String insertedPlugs = scan.nextLine().toUpperCase(); //read input
         int plugSize = insertedPlugs.length();
         int alphabetsSize = alphabets.length();
 
