@@ -81,6 +81,20 @@ public class Main {
         String reflectorName8 = "ETW";
         String reflector8 = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
+        /**
+         * Parts
+         */
+
+
+        /**
+         * Others
+         */
+
+
+
+
+
+
 
         /**=====================================
          * Initialisation
@@ -140,13 +154,7 @@ public class Main {
          */
 
         System.out.println("Please enter reflector, selecting from " + reflectorNameList + ".");
-<<<<<<< HEAD
         int[] reflector = selectWheel(reflectorSet, reflectorNames, keyboard);
-=======
-        String reflectorSelected = selectRotor(reflectorSet, reflectorNames);
-        System.out.println("");
-        int[] reflectorPositionArray = numberPositionArray(keyboard, reflectorSelected);
->>>>>>> origin/master
 
         /*
         Setup rotors
@@ -155,43 +163,20 @@ public class Main {
         //Setup left rotor
         System.out.println("Please enter left rotor, selecting from " + rotorNameList + ".");
 
-<<<<<<< HEAD
         int[] rotorLeft = selectWheel(rotorSet, rotorNames, keyboard);
         int[] steppingLeft = getSteppingPosition(rotorLeft, rotorSet, rotorSteppingPositions, keyboard);
-=======
-        String rotorLeft = selectRotor(rotorSet, rotorNames);
-        int[] rotorLeftPositionArray = numberPositionArray(keyboard, rotorLeft);
-        String rotorLeftSteppingPosition = loadRotorSteppingPosition(rotorLeft, rotorSet, rotorSteppingPositions);
-        int[] steppingLeftPositionArry = numberPositionArray(keyboard, rotorLeftSteppingPosition);
->>>>>>> origin/master
 
         //Setup middle rotor
         System.out.println("Please enter middle rotor, selecting from " + rotorNameList + ".");
 
-<<<<<<< HEAD
         int[] rotorMiddle = selectWheel(rotorSet, rotorNames, keyboard);
         int[] steppingMiddle = getSteppingPosition(rotorMiddle, rotorSet, rotorSteppingPositions, keyboard);
-=======
-        String rotorMiddle = selectRotor(rotorSet, rotorNames);
-        int[] rotorMiddlePositionArray = numberPositionArray(keyboard, rotorLeft);
-        String rotorMiddleSteppingPosition = loadRotorSteppingPosition(rotorMiddle, rotorSet, rotorSteppingPositions);
-        int[] steppingMiddlePositionArry = numberPositionArray(keyboard, rotorMiddleSteppingPosition);
-
->>>>>>> origin/master
 
         //Setup right rotor
         System.out.println("Please enter right rotor, selecting from " + rotorNameList + ".");
 
-<<<<<<< HEAD
         int[] rotorRight = selectWheel(rotorSet, rotorNames, keyboard);
         int[] steppingRight = getSteppingPosition(rotorRight, rotorSet, rotorSteppingPositions, keyboard);
-=======
-        String rotorRight = selectRotor(rotorSet, rotorNames);
-        int[] rotorRightPositionArray = numberPositionArray(keyboard, rotorRight);
-        String rotorRightSteppingPosition = loadRotorSteppingPosition(rotorRight, rotorSet, rotorSteppingPositions);
-        int[] steppingRightPositionArry = numberPositionArray(keyboard, rotorRightSteppingPosition);
-
->>>>>>> origin/master
 
         /*
         Setup letter ring
@@ -199,7 +184,6 @@ public class Main {
 
         //Setup left letter ring
         System.out.println("Please enter left letter ring position, single alphabet only.");
-<<<<<<< HEAD
         int ringLeft = getPosition(keyboard);
 
         //Setup left middle ring
@@ -209,29 +193,11 @@ public class Main {
         //Setup right letter ring
         System.out.println("Please enter right letter ring position, single alphabet only.");
         int ringRight = getPosition(keyboard);
-=======
-        char ringPositionLeft = setupPosition(keyboard);
-        System.out.println("left letter ring on " + ringPositionLeft + " position.");
-        int ringLeftNumberPosition = windowNumberPosition(ringPositionLeft, keyboard);
-
-        //Setup left middle ring
-        System.out.println("Please enter middle letter ring position, single alphabet only.");
-        char ringPositionMiddle = setupPosition(keyboard);
-        System.out.println("middle letter ring on " + ringPositionMiddle + " position.");
-        int ringMiddleNumberPosition = windowNumberPosition(ringPositionMiddle, keyboard);
-
-        //Setup right letter ring
-        System.out.println("Please enter right letter ring position, single alphabet only.");
-        char ringPositionRight = setupPosition(keyboard);
-        System.out.println("Right letter ring on " + ringPositionRight + " position.");
-        int ringRightNumberPosition = windowNumberPosition(ringPositionRight, keyboard);
->>>>>>> origin/master
 
         /*
         Setup rotor position
          */
 
-<<<<<<< HEAD
         //Setup left letter ring
         System.out.println("Please enter left window position, single alphabet only.");
         int windowLeft = getPosition(keyboard);
@@ -243,25 +209,6 @@ public class Main {
         //Setup right letter ring
         System.out.println("Please enter right window position, single alphabet only.");
         int windowRight = getPosition(keyboard);
-=======
-        //Setup left rotor
-        System.out.println("Please enter left rotor position, single alphabet only.");
-        char windowPositionLeft = setupPosition(keyboard);
-        System.out.println("left rotor on " + windowPositionLeft + " position.");
-        int windowNumberPositionLeft = windowNumberPosition(windowPositionLeft, keyboard);
-
-        //Setup middle rotor
-        System.out.println("Please enter middle rotor position, single alphabet only.");
-        char windowPositionMiddle = setupPosition(keyboard);
-        System.out.println("middle rotor on " + windowPositionMiddle + " position.");
-        int windowNumberPositionMiddle = windowNumberPosition(windowPositionMiddle, keyboard);
-
-        //Setup right rotor
-        System.out.println("Please enter right rotor position, single alphabet only.");
-        char windowPositionRight = setupPosition(keyboard);
-        System.out.println("Right rotor on " + windowPositionRight + " position.");
-        int windowNumberPositionRight = windowNumberPosition(windowPositionRight, keyboard);
->>>>>>> origin/master
 
         /*
         Setup plug-board
@@ -308,11 +255,6 @@ public class Main {
 
         /**=====================================
          * Final output
-         =====================================*/
-
-
-        /**=====================================
-         * Read message
          =====================================*/
 
 
@@ -732,71 +674,6 @@ public class Main {
 
         String letterString = new String(letterArray);
         return letterString;
-
-    }
-
-    /**
-     * Function: turn alphabet strings into int arrays
-     * int represent numerical position 0~25
-     *
-     * @param alphabets String of 26 alphabets
-     * @param inputString String of selected rotors, stepping positions, and reflectors
-     */
-
-    public static int[] numberPositionArray (String alphabets, String inputString) {
-
-        int arraySize = inputString.length();
-        int[] numberPositionArray = new int[arraySize];
-
-        for (int i = 0; i < arraySize; i ++) {
-
-            for (int j = 0; j<26; j ++) {
-
-                if (inputString.charAt(i) == alphabets.charAt(j)) {
-
-                    numberPositionArray[i] = j;
-                    System.out.println(inputString.charAt(i) + " matches" + alphabets.charAt(j) + " with position " + j);
-                    System.out.println("");
-
-                    break;
-
-                }
-
-            }
-
-        }
-
-        return numberPositionArray;
-
-    }
-
-    /**
-     * Function: turn char into number position
-     *
-     * for widow position of rotors
-     * @param windowPosition
-     * @param alphabets
-     */
-
-    public static int windowNumberPosition (char windowPosition, String alphabets) {
-
-        int numberPosition = 26;
-
-        for (int i = 0; i < 26; i++) {
-
-            if (windowPosition == alphabets.charAt(i)) {
-
-                numberPosition = i;
-                System.out.println(windowPosition + " matches" + alphabets.charAt(i) + " with position " + numberPosition);
-                System.out.println("");
-
-                break;
-
-            }
-
-        }
-
-        return numberPosition;
 
     }
 
