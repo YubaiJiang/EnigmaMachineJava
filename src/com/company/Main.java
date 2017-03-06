@@ -80,20 +80,6 @@ public class Main {
         String reflectorName8 = "ETW";
         String reflector8 = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
-        /**
-         * Parts
-         */
-
-
-        /**
-         * Others
-         */
-
-
-
-
-
-
 
         /**=====================================
          * Initialisation
@@ -156,8 +142,9 @@ public class Main {
          */
 
         System.out.println("Please enter reflector, selecting from " + reflectorNameList + ".");
-        String reflector = selectRotor(reflectorSet, reflectorNames);
+        String reflectorSelected = selectRotor(reflectorSet, reflectorNames);
         System.out.println("");
+        int[] reflectorPositionArray = numberPositionArray(keyboard, reflectorSelected);
 
         /*
         Setup rotors
@@ -167,22 +154,27 @@ public class Main {
         System.out.println("Please enter left rotor, selecting from " + rotorNameList + ".");
 
         String rotorLeft = selectRotor(rotorSet, rotorNames);
+        int[] rotorLeftPositionArray = numberPositionArray(keyboard, rotorLeft);
         String rotorLeftSteppingPosition = loadRotorSteppingPosition(rotorLeft, rotorSet, rotorSteppingPositions);
-        System.out.println("");
+        int[] steppingLeftPositionArry = numberPositionArray(keyboard, rotorLeftSteppingPosition);
 
         //Setup middle rotor
         System.out.println("Please enter middle rotor, selecting from " + rotorNameList + ".");
 
         String rotorMiddle = selectRotor(rotorSet, rotorNames);
+        int[] rotorMiddlePositionArray = numberPositionArray(keyboard, rotorLeft);
         String rotorMiddleSteppingPosition = loadRotorSteppingPosition(rotorMiddle, rotorSet, rotorSteppingPositions);
-        System.out.println("");
+        int[] steppingMiddlePositionArry = numberPositionArray(keyboard, rotorMiddleSteppingPosition);
+
 
         //Setup right rotor
         System.out.println("Please enter right rotor, selecting from " + rotorNameList + ".");
 
         String rotorRight = selectRotor(rotorSet, rotorNames);
+        int[] rotorRightPositionArray = numberPositionArray(keyboard, rotorRight);
         String rotorRightSteppingPosition = loadRotorSteppingPosition(rotorRight, rotorSet, rotorSteppingPositions);
-        System.out.println("");
+        int[] steppingRightPositionArry = numberPositionArray(keyboard, rotorRightSteppingPosition);
+
 
         /*
         Setup letter ring
@@ -192,41 +184,41 @@ public class Main {
         System.out.println("Please enter left letter ring position, single alphabet only.");
         char ringPositionLeft = setupPosition(keyboard);
         System.out.println("left letter ring on " + ringPositionLeft + " position.");
-        System.out.println("");
+        int ringLeftNumberPosition = windowNumberPosition(ringPositionLeft, keyboard);
 
         //Setup left middle ring
         System.out.println("Please enter middle letter ring position, single alphabet only.");
         char ringPositionMiddle = setupPosition(keyboard);
         System.out.println("middle letter ring on " + ringPositionMiddle + " position.");
-        System.out.println("");
+        int ringMiddleNumberPosition = windowNumberPosition(ringPositionMiddle, keyboard);
 
         //Setup right letter ring
         System.out.println("Please enter right letter ring position, single alphabet only.");
-        char ringPositionright = setupPosition(keyboard);
-        System.out.println("Right letter ring on " + ringPositionright + " position.");
-        System.out.println("");
+        char ringPositionRight = setupPosition(keyboard);
+        System.out.println("Right letter ring on " + ringPositionRight + " position.");
+        int ringRightNumberPosition = windowNumberPosition(ringPositionRight, keyboard);
 
         /*
         Setup rotor position
          */
 
-        //Setup left letter ring
+        //Setup left rotor
         System.out.println("Please enter left rotor position, single alphabet only.");
-        char rotorPositionLeft = setupPosition(keyboard);
-        System.out.println("left rotor on " + rotorPositionLeft + " position.");
-        System.out.println("");
+        char windowPositionLeft = setupPosition(keyboard);
+        System.out.println("left rotor on " + windowPositionLeft + " position.");
+        int windowNumberPositionLeft = windowNumberPosition(windowPositionLeft, keyboard);
 
-        //Setup left middle ring
+        //Setup middle rotor
         System.out.println("Please enter middle rotor position, single alphabet only.");
-        char rotorPositionMiddle = setupPosition(keyboard);
-        System.out.println("middle rotor on " + rotorPositionMiddle + " position.");
-        System.out.println("");
+        char windowPositionMiddle = setupPosition(keyboard);
+        System.out.println("middle rotor on " + windowPositionMiddle + " position.");
+        int windowNumberPositionMiddle = windowNumberPosition(windowPositionMiddle, keyboard);
 
-        //Setup right letter ring
+        //Setup right rotor
         System.out.println("Please enter right rotor position, single alphabet only.");
-        char rotorPositionRight = setupPosition(keyboard);
-        System.out.println("Right rotor on " + rotorPositionRight + " position.");
-        System.out.println("");
+        char windowPositionRight = setupPosition(keyboard);
+        System.out.println("Right rotor on " + windowPositionRight + " position.");
+        int windowNumberPositionRight = windowNumberPosition(windowPositionRight, keyboard);
 
         /*
         Setup plug-board
@@ -235,6 +227,11 @@ public class Main {
         System.out.println("Please enter plug-board setting, even number of alphabets only.");
         String plugboard = insertPlugs(keyboard);
         System.out.println("");
+
+
+        /**=====================================
+         * Read message
+         =====================================*/
 
 
     }
@@ -559,6 +556,71 @@ public class Main {
         }
 
         return inputPositionChar;
+
+    }
+
+    /**
+     * Function: turn alphabet strings into int arrays
+     * int represent numerical position 0~25
+     *
+     * @param alphabets String of 26 alphabets
+     * @param inputString String of selected rotors, stepping positions, and reflectors
+     */
+
+    public static int[] numberPositionArray (String alphabets, String inputString) {
+
+        int arraySize = inputString.length();
+        int[] numberPositionArray = new int[arraySize];
+
+        for (int i = 0; i < arraySize; i ++) {
+
+            for (int j = 0; j<26; j ++) {
+
+                if (inputString.charAt(i) == alphabets.charAt(j)) {
+
+                    numberPositionArray[i] = j;
+                    System.out.println(inputString.charAt(i) + " matches" + alphabets.charAt(j) + " with position " + j);
+                    System.out.println("");
+
+                    break;
+
+                }
+
+            }
+
+        }
+
+        return numberPositionArray;
+
+    }
+
+    /**
+     * Function: turn char into number position
+     *
+     * for widow position of rotors
+     * @param windowPosition
+     * @param alphabets
+     */
+
+    public static int windowNumberPosition (char windowPosition, String alphabets) {
+
+        int numberPosition = 26;
+
+        for (int i = 0; i < 26; i++) {
+
+            if (windowPosition == alphabets.charAt(i)) {
+
+                numberPosition = i;
+                System.out.println(windowPosition + " matches" + alphabets.charAt(i) + " with position " + numberPosition);
+                System.out.println("");
+
+                break;
+
+            }
+
+        }
+
+        return numberPosition;
 
     }
 
