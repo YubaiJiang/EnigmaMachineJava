@@ -525,7 +525,7 @@ public class Main {
                         break;
 
                     }
-                    
+
                 }
 
                 if (validityString) {
