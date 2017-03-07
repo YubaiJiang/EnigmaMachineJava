@@ -217,7 +217,9 @@ public class Main {
         System.out.println("Please enter plug-board setting, even number of alphabets only.");
         char[] plugboard = insertPlugs(keyboard);
 
-        while() {
+        boolean loop = true;
+
+        while(loop) {
 
             /**=====================================
              * Read message into char[]
