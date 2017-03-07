@@ -81,21 +81,6 @@ public class Main {
         String reflectorName8 = "ETW";
         String reflector8 = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
-        /**
-         * Parts
-         */
-
-
-        /**
-         * Others
-         */
-
-
-
-
-
-
-
         /**=====================================
          * Initialisation
          =====================================*/
