@@ -256,19 +256,6 @@ public class Main {
                 variables involved: int windowRight/Middle/Left, int[] steppingRight/Middle
                  */
 
-                //right rotor always steps
-
-                windowRight++;
-
-                if (windowRight > 25) {
-
-                    windowRight = windowRight - 26;
-
-                }
-
-                System.out.println("Right stepping to " + windowRight);
-                System.out.println("");
-
                 //check if double stepping available.
 
                 int middleSteppingSize = Array.getLength(steppingMiddle);
@@ -311,7 +298,7 @@ public class Main {
 
                 for (int j = 0; j < rightSteppingSize; j++) {
 
-                    if (windowRight == steppingRight[j] + 1) {
+                    if (windowRight == steppingRight[j]) {
 
                         windowMiddle++;
 
@@ -328,6 +315,19 @@ public class Main {
                     }
 
                 }
+
+                //right rotor always steps
+
+                windowRight++;
+
+                if (windowRight > 25) {
+
+                    windowRight = windowRight - 26;
+
+                }
+
+                System.out.println("Right stepping to " + windowRight);
+                System.out.println("");
 
                 //run number through right rotor
                 messageNumberArray[i] = runRotor(messageNumberArray[i], rotorRight, ringRight, windowRight);
@@ -975,20 +975,32 @@ public class Main {
         System.out.print("Input position: " + input + "; ");
 
         //set output location
-        int out = input + ring + window;
+        int out = input - ring + window;
 
-        //make sure output location is smaller than 26
+        //make sure output location is between 0-25
         while(out > 25){
 
             out = out - 26;
 
         }
 
-        int output = rotor[out] + window;
+        while(out < 0) {
+
+            out = out + 26;
+
+        }
+
+        int output = rotor[out] + ring - window;
 
         while(output > 25){
 
             output = output - 26;
+
+        }
+
+        while(output < 0){
+
+            output = output + 26;
 
         }
 
@@ -1014,7 +1026,13 @@ public class Main {
         int rotorSize = Array.getLength(rotor);
         int out = 26;
 
-        input = input - window;
+        input = input + window - ring;
+
+        while(input > 25){
+
+            input = input - 26;
+
+        }
 
         while(input < 0){
 
@@ -1026,7 +1044,7 @@ public class Main {
 
             if(input == rotor[i]){
 
-                out = i - window - ring;
+                out = i - window + ring;
 
                 break;
 
@@ -1034,7 +1052,14 @@ public class Main {
 
         }
 
-        //make sure out is no less than 0
+        //make sure out is between 0-25
+
+        while(out > 25){
+
+            out = out - 26;
+
+        }
+
         while(out < 0){
 
             out = out + 26;
@@ -1045,7 +1070,7 @@ public class Main {
         input = out;
 
         //feedback
-        System.out.println("output position: " + input + ".");
+        System.out.println(" output position: " + input + ".");
         System.out.println("");
         return input;
 
