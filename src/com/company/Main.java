@@ -269,13 +269,13 @@ public class Main {
 
                 //stepping
 
-            /*
-            Right rotor always step. Middle rotor steps whenever right rotor stepped at right stepping position and
-            at middle rotor at stepping position itself. Left rotor steps whenever middle rotor steps at middle
-            stepping position
+                /*
+                Right rotor always step. Middle rotor steps whenever right rotor stepped at right stepping position and
+                at middle rotor at stepping position itself. Left rotor steps whenever middle rotor steps at middle
+                stepping position
 
-            variables involved: int windowRight/Middle/Left, int[] steppingRight/Middle
-             */
+                variables involved: int windowRight/Middle/Left, int[] steppingRight/Middle
+                 */
 
                 //right rotor always steps
 
@@ -288,6 +288,7 @@ public class Main {
                 }
 
                 System.out.println("Right stepping to " + windowRight);
+                System.out.println("");
 
                 //check if double stepping available.
 
@@ -316,7 +317,9 @@ public class Main {
                         }
 
                         System.out.println("Middle stepping to " + windowMiddle);
+                        System.out.println("");
                         System.out.println("Left stepping to " + windowLeft);
+                        System.out.println("");
                         break;
 
                     }
@@ -329,7 +332,7 @@ public class Main {
 
                 for (int j = 0; j < rightSteppingSize; j++) {
 
-                    if (windowRight == steppingRight[j]) {
+                    if (windowRight == steppingRight[j] + 1) {
 
                         windowMiddle++;
 
@@ -340,6 +343,7 @@ public class Main {
                         }
 
                         System.out.println("Middle stepping to " + windowMiddle);
+                        System.out.println("");
                         break;
 
                     }
@@ -347,6 +351,7 @@ public class Main {
                 }
 
             }
+
 
             //casting output message into char[]
             String messageAfterRotor = getAlphabeticalString(messageNumberArray, keyboard);
@@ -979,7 +984,13 @@ public class Main {
 
         }
 
-        int output = rotor[out];
+        int output = rotor[out] + window;
+
+        while(output > 25){
+
+            output = output - 26;
+
+        }
 
         //feedback
         System.out.println("output position: " + output + ".");
@@ -1002,6 +1013,14 @@ public class Main {
         //seek input position
         int rotorSize = Array.getLength(rotor);
         int out = 26;
+
+        input = input - window;
+
+        while(input < 0){
+
+            input = input + 26;
+
+        }
 
         for(int i = 0; i < rotorSize; i++){
 
