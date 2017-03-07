@@ -246,27 +246,6 @@ public class Main {
 
             for (int i = 0; i < messageSize; i++) {
 
-                //run number through right rotor
-                messageNumberArray[i] = runRotor(messageNumberArray[i], rotorRight, ringRight, windowRight);
-
-                //run number through middle rotor
-                messageNumberArray[i] = runRotor(messageNumberArray[i], rotorMiddle, ringMiddle, windowMiddle);
-
-                //run number through left rotor
-                messageNumberArray[i] = runRotor(messageNumberArray[i], rotorLeft, ringLeft, windowLeft);
-
-                //run number through reflector
-                messageNumberArray[i] = runRotor(messageNumberArray[i], reflector, 0, 0);
-
-                //run number through left rotor reversed
-                messageNumberArray[i] = runRotorReversed(messageNumberArray[i], rotorLeft, ringLeft, windowLeft);
-
-                //run number through middle rotor reversed
-                messageNumberArray[i] = runRotorReversed(messageNumberArray[i], rotorMiddle, ringMiddle, windowMiddle);
-
-                //run number through right rotor reversed
-                messageNumberArray[i] = runRotorReversed(messageNumberArray[i], rotorRight, ringRight, windowRight);
-
                 //stepping
 
                 /*
@@ -349,6 +328,27 @@ public class Main {
                     }
 
                 }
+
+                //run number through right rotor
+                messageNumberArray[i] = runRotor(messageNumberArray[i], rotorRight, ringRight, windowRight);
+
+                //run number through middle rotor
+                messageNumberArray[i] = runRotor(messageNumberArray[i], rotorMiddle, ringMiddle, windowMiddle);
+
+                //run number through left rotor
+                messageNumberArray[i] = runRotor(messageNumberArray[i], rotorLeft, ringLeft, windowLeft);
+
+                //run number through reflector
+                messageNumberArray[i] = runRotor(messageNumberArray[i], reflector, 0, 0);
+
+                //run number through left rotor reversed
+                messageNumberArray[i] = runRotorReversed(messageNumberArray[i], rotorLeft, ringLeft, windowLeft);
+
+                //run number through middle rotor reversed
+                messageNumberArray[i] = runRotorReversed(messageNumberArray[i], rotorMiddle, ringMiddle, windowMiddle);
+
+                //run number through right rotor reversed
+                messageNumberArray[i] = runRotorReversed(messageNumberArray[i], rotorRight, ringRight, windowRight);
 
             }
 
