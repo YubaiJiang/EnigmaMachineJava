@@ -217,46 +217,148 @@ public class Main {
         System.out.println("Please enter plug-board setting, even number of alphabets only.");
         char[] plugboard = insertPlugs(keyboard);
 
-        /**=====================================
-         * Read and check message into char[]
-         =====================================*/
-
-        /**=====================================
-         * Runstrough plugboard
-         =====================================*/
-
-        /**=====================================
-         * Casting into number array
-         =====================================*/
+        while() {
 
             /**=====================================
-             * Runthrough rotors
+             * Read message into char[]
              =====================================*/
+
+            //request input
+            System.out.println("Please enter your message, maximum 500 characters, alphabets only. Enter 0 to stop");
+            char[] messageInput = readMessage(keyboard);
 
             /**=====================================
-             * Runthrough reflectors
+             * run message through Enigma Machine
              =====================================*/
 
-            /**=====================================
-             * Runthrough rotors (reversed)
-             =====================================*/
+            //run through plugboard
+            char[] messageInProgress = runPlugboard(messageInput, plugboard);
 
-            /**=====================================
-             * Stepping
-             =====================================*/
+            //Casting into number array
+            String messageBeforeRotorString = new String(messageInProgress);
+            int[] messageNumberArray = getNumberArray(messageBeforeRotorString, keyboard);
 
-        /**=====================================
-         * Casting into char[]
-         =====================================*/
+            //run through rotors one number by one number
 
-        /**=====================================
-         * Runthrough plugboard
-         =====================================*/
+            int messageSize = Array.getLength(messageNumberArray);
 
-        /**=====================================
-         * Final output
-         =====================================*/
+            for (int i = 0; i < messageSize; i++) {
 
+                //run number through right rotor
+                messageNumberArray[i] = runRotor(messageNumberArray[i], rotorRight, ringRight, windowRight);
+
+                //run number through middle rotor
+                messageNumberArray[i] = runRotor(messageNumberArray[i], rotorMiddle, ringMiddle, windowMiddle);
+
+                //run number through left rotor
+                messageNumberArray[i] = runRotor(messageNumberArray[i], rotorLeft, ringLeft, windowLeft);
+
+                //run number through reflector
+                messageNumberArray[i] = runRotor(messageNumberArray[i], reflector, 0, 0);
+
+                //run number through left rotor reversed
+                messageNumberArray[i] = runRotorReversed(messageNumberArray[i], rotorLeft, ringLeft, windowLeft);
+
+                //run number through middle rotor reversed
+                messageNumberArray[i] = runRotorReversed(messageNumberArray[i], rotorMiddle, ringMiddle, windowMiddle);
+
+                //run number through right rotor reversed
+                messageNumberArray[i] = runRotorReversed(messageNumberArray[i], rotorRight, ringRight, windowRight);
+
+                //stepping
+
+            /*
+            Right rotor always step. Middle rotor steps whenever right rotor stepped at right stepping position and
+            at middle rotor at stepping position itself. Left rotor steps whenever middle rotor steps at middle
+            stepping position
+
+            variables involved: int windowRight/Middle/Left, int[] steppingRight/Middle
+             */
+
+                //right rotor always steps
+
+                windowRight++;
+
+                if (windowRight > 25) {
+
+                    windowRight = windowRight - 26;
+
+                }
+
+                System.out.println("Right stepping to " + windowRight);
+
+                //check if double stepping available.
+
+                int middleSteppingSize = Array.getLength(steppingMiddle);
+
+                for (int j = 0; j < middleSteppingSize; j++) {
+
+                    if (windowMiddle == steppingMiddle[j]) {
+
+                        windowMiddle++;
+
+                        if (windowMiddle > 25) {
+
+                            windowMiddle = windowMiddle - 26;
+
+                        }
+
+                        //Stepping left as well
+
+                        windowLeft++;
+
+                        if (windowLeft > 25) {
+
+                            windowLeft = windowLeft - 26;
+
+                        }
+
+                        System.out.println("Middle stepping to " + windowMiddle);
+                        System.out.println("Left stepping to " + windowLeft);
+                        break;
+
+                    }
+
+                }
+
+                //check if right stepped on stepping position.
+
+                int rightSteppingSize = Array.getLength(steppingRight);
+
+                for (int j = 0; j < rightSteppingSize; j++) {
+
+                    if (windowRight == steppingRight[j]) {
+
+                        windowMiddle++;
+
+                        if (windowMiddle > 25) {
+
+                            windowMiddle = windowMiddle - 26;
+
+                        }
+
+                        System.out.println("Middle stepping to " + windowMiddle);
+                        break;
+
+                    }
+
+                }
+
+            }
+
+            //casting output message into char[]
+            String messageAfterRotor = getAlphabeticalString(messageNumberArray, keyboard);
+            char[] messageAfterRotorArray = messageAfterRotor.toCharArray();
+
+            //run plugboard again
+            char[] messageOutputArray = runPlugboard(messageAfterRotorArray, plugboard);
+
+            //casting final message into String and print
+            String messageOutput = new String(messageOutputArray);
+            System.out.println("message output is: " + messageOutput + ".");
+            System.out.println("");
+
+        }
 
     }
 
@@ -272,7 +374,7 @@ public class Main {
      * @return rotorSelected: String of selected rotor/reflector details
      */
 
-    public static int[] selectWheel (String[] partSets, String[] nameSets, String alphabets){
+    public static int[] selectWheel(String[] partSets, String[] nameSets, String alphabets){
 
         boolean validity = false;
 
@@ -612,6 +714,183 @@ public class Main {
     }
 
     /**
+     * Function: Read message into char[]
+     */
+
+    public static char[] readMessage(String alphabets){
+
+        Scanner scan = new Scanner(System.in);
+        String input = scan.nextLine().toUpperCase().replaceAll("\\s+",""); //read input
+        int inputSize = input.length();
+        int alphabetsSize = alphabets.length();
+
+        boolean validitySize;
+        boolean validityString = false;
+        boolean[] validityCharacter = new boolean[500];
+
+        boolean validity = false;
+
+        //check user input validity
+        while(!validity) {
+
+            //check if user entered input of correct size
+            validitySize = false; //set to default, change to true later in test.
+            while(!validitySize){
+
+                //check if the size is even and no more than 20
+                if(inputSize > 0 && inputSize <= 500){
+
+                    System.out.println("");
+                    System.out.println("Input length is valid.");
+                    validitySize = true;
+                    System.out.println("");
+
+                } else {
+
+                    System.out.println("");
+                    System.out.println("Input invalid, wrong number of characters. Please enter again.");
+                    input = scan.nextLine().toUpperCase(); // reset input
+                    inputSize = input.length(); // reset size
+
+                }
+
+            }
+
+            //check if the input are all alphabets
+            while (!validityString) {
+
+                //set all characters valid as default, test later
+
+                for(int i = 0; i < 500; i++){
+
+                    validityCharacter[i] = true;
+
+                }
+
+                //check if characters in input match to any alphabet.
+                for (int i = 0; i < inputSize; i++) {
+
+                    validityCharacter[i] = false; // default, change later.
+
+                    for (int j = 0; j < alphabetsSize; j++) {
+
+
+                        if (input.charAt(i) == (alphabets.charAt(j))) {
+
+                            validityCharacter[i] = true;
+
+                        }
+
+                    }
+
+                    if (validityCharacter[i]) {
+
+                        System.out.println(input.charAt(i) + " is a valid character.");
+
+                    } else {
+
+                        System.out.println(input.charAt(i) + " is an invalid character.");
+
+                    }
+
+                }
+
+                //assess matching results
+
+                validityString = true; //set as default. If false, change to false later
+                for (int i = 0; i < inputSize; i++) {
+
+                    if (!validityCharacter[i]) {
+
+                        validityString = false;
+                        validitySize = false;
+                        System.out.println("");
+                        System.out.println("Input invalid, invalid characters. Please enter again.");
+                        input = scan.nextLine().toUpperCase(); // reset input
+                        inputSize = input.length(); // reset size
+
+                        break;
+
+                    }
+
+                }
+
+                if(!validityString){
+
+                    break;
+
+                }
+
+            }
+
+            //check if the input is valid (all alphabets, >0, <=500)
+            if (validitySize && validityString) {
+
+                validity = true;
+                System.out.println("");
+                System.out.println("Input: " + input +".");
+                System.out.println("");
+
+            }
+
+        }
+
+        //casting
+        char[] inputMessageArray = input.toCharArray();
+
+        //feedback
+        System.out.println("Typing: " + java.util.Arrays.toString(inputMessageArray));
+        System.out.println("");
+        return inputMessageArray;
+
+    }
+
+    /**
+     * Function: ran char[] through plugboard
+     */
+
+    public static char[] runPlugboard(char[] inputArray, char[] plugboard){
+
+        int inputSize = Array.getLength(inputArray);
+        int plugSize = Array.getLength(plugboard);
+
+        System.out.println("Running message through plugboard...");
+
+        for(int i = 0; i < inputSize; i++){
+
+            for(int j = 0; j < plugSize; j++){
+
+                if((inputArray[i] == plugboard[j]) && (j % 2 == 0)){
+
+                    System.out.println("Plug " + plugboard[j] + " triggered, switch to " + plugboard[j + 1]);
+                    inputArray[i] = plugboard[j + 1];
+                    break;
+
+                }
+
+                if((inputArray[i] == plugboard[j]) && (j % 2 == 1)){
+
+                    System.out.println("Plug " + plugboard[j] + " triggered, switch to " + plugboard[j - 1]);
+                    inputArray[i] = plugboard[j - 1];
+                    break;
+
+                }
+
+            }
+
+        }
+
+        //feedback
+
+        System.out.println("");
+        System.out.println("Message output from plugboard is " + java.util.Arrays.toString(inputArray));
+        System.out.println("");
+        return inputArray;
+
+    }
+
+
+    /**
      * Function: Turn alphabetical string into number array
      */
 
@@ -674,6 +953,80 @@ public class Main {
 
         String letterString = new String(letterArray);
         return letterString;
+
+    }
+
+    /**
+     * Function: run through rotor
+     */
+
+    public static int runRotor(int input, int[] rotor, int ring, int window){
+
+        //feedback
+        System.out.println("Rotor details: " + java.util.Arrays.toString(rotor) + ".");
+        System.out.println("ring position: " + ring + "; window position: " + window + ".");
+        System.out.print("Input position: " + input + "; ");
+
+        //set output location
+        int out = input + ring + window;
+
+        //make sure output location is smaller than 26
+        while(out > 25){
+
+            out = out - 26;
+
+        }
+
+        int output = rotor[out];
+
+        //feedback
+        System.out.println("output position: " + output + ".");
+        System.out.println("");
+        return output;
+
+    }
+
+    /**
+     * Function: run through rotor reversed
+     */
+
+    public static int runRotorReversed(int input, int[] rotor, int ring, int window){
+
+        //feedback
+        System.out.println("Rotor details: " + java.util.Arrays.toString(rotor) + ".");
+        System.out.println("ring position: " + ring + "; window position: " + window + ".");
+        System.out.print("Input position: " + input + ";");
+
+        //seek input position
+        int rotorSize = Array.getLength(rotor);
+        int out = 26;
+
+        for(int i = 0; i < rotorSize; i++){
+
+            if(input == rotor[i]){
+
+                out = i - window - ring;
+
+                break;
+
+            }
+
+        }
+
+        //make sure out is no less than 0
+        while(out < 0){
+
+            out = out + 26;
+
+        }
+
+        //update input
+        input = out;
+
+        //feedback
+        System.out.println("output position: " + input + ".");
+        System.out.println("");
+        return input;
 
     }
 
