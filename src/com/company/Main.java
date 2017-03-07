@@ -226,7 +226,7 @@ public class Main {
              =====================================*/
 
             //request input
-            System.out.println("Please enter your message, maximum 500 characters, alphabets only. Enter 0 to stop");
+            System.out.println("Please enter your message, maximum 500 characters, alphabets only.");
             char[] messageInput = readMessage(keyboard);
 
             /**=====================================
