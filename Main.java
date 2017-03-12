@@ -1,4 +1,3 @@
-package com.company;
 import java.lang.reflect.Array;
 import java.util.Scanner;
 
@@ -237,7 +236,6 @@ public class Main {
                 Right rotor always step. Middle rotor steps whenever right rotor stepped at right stepping position and
                 at middle rotor at stepping position itself. Left rotor steps whenever middle rotor steps at middle
                 stepping position
-
                 variables involved: int windowRight/Middle/Left, int[] steppingRight/Middle
                  */
 
