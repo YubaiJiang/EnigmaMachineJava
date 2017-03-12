@@ -1,7 +1,7 @@
 import java.lang.reflect.Array;
 import java.util.Scanner;
 
-public class Main {
+public class enigma_machine_java {
 
     /**=====================================
      * Main function
